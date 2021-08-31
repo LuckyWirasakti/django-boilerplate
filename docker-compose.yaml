@@ -1,0 +1,37 @@
+version: '3.7'
+   
+services:
+  database:
+    image: postgres:alpine
+    container_name: database-container-preview
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks: 
+      - localhost
+  web:
+    build: .
+    image: web-image-preview
+    restart: unless-stopped
+    container_name: web-container-preview
+    volumes:
+      - .:/home/core
+    environment: 
+      - DEBUG=1
+      - SECRET_KEY=django-insecure-c4gb=ynqq$$bpw)vcb!ss0gdh3v63v_=eq5_-j2p18a&$$*h5a57
+      - ALLOWED_HOSTS=localhost,0.0.0.0
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports: 
+      - 8888:8000
+    depends_on:
+      - database
+    networks: 
+      - localhost
+
+networks: 
+  localhost:
+    driver: bridge

@@ -1,0 +1,11 @@
+.bash_history
+.local
+.cache
+.DS_Store
+/media/
+/static/
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3

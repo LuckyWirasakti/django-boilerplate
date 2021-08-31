@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-alpha.5
+* @link https://github.com/tabler/tabler
+* Copyright 2018-2019 The Tabler Authors
+* Copyright 2018-2019 codecalm.net Paweł Kuna
+* Licensed under MIT (https://tabler.io/license)
+-->
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>{{ page_title }} - Tabler Dashboard</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <meta name="msapplication-TileColor" content="#206bc4" />
+  <meta name="theme-color" content="#206bc4" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <link rel="icon" href="{% static 'cms/img/logo/favicon.ico' %}" type="image/x-icon" />
+  <link rel="shortcut icon" href="{% static 'cms/img/logo/favicon.ico' %}" type="image/x-icon" />
+  <!-- Tabler Core -->
+  <link href="{% static 'cms/css/tabler.min.css' %}" rel="stylesheet" />
+</head>
+
+<body class="antialiased">
+  {% include 'cms/partials/sidebar.html' %}
+  <div class="page">
+    {% include 'cms/partials/topbar.html' %}
+    <div class="content">
+      <div class="container-xl">
+        <!-- Page title -->
+        {% block content %}{% endblock content %}
+      </div>
+      <footer class="footer footer-transparent">
+        <div class="container">
+          <div class="row text-center align-items-center flex-row-reverse">
+            <div class="col-lg-auto ml-lg-auto">
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
+                    class="link-secondary">All rights reserved.</a></li>
+              </ul>
+            </div>
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+              © 2020
+              <a href="." class="link-secondary">Tabler</a>.
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Libs JS -->
+  <script src="{% static 'cms/libs/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'cms/libs/jquery/dist/jquery.slim.min.js' %}"></script>
+  <!-- Tabler Core -->
+  <script src="{% static 'cms/js/tabler.min.js' %}"></script>
+</body>
+
+</html>

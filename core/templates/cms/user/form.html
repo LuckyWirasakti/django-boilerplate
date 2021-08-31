@@ -1,0 +1,32 @@
+{% extends 'cms/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="row row-cards">
+    <div class="col">
+        <div class="card">
+            <form method="post">
+            <div class="card-status-top bg-primary"></div>
+            <div class="card-header">
+                <h3 class="d-block">User Creation Form</h3>
+                <span>You can edit form below</span>
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {% bootstrap_form form layout='horizontal' %}
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                {% buttons %}
+                <button type="button" onclick="history.back()" class="btn btn-secondary">
+                    Back
+                </button>
+                <button type="submit" class="btn btn-primary">
+                    Submit
+                </button>
+                {% endbuttons %}
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

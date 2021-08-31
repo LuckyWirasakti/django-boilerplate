@@ -1,0 +1,76 @@
+{% load django_tables2 %}
+{% load i18n %}
+{% block table-wrapper %}
+{% if table.breadcrumb %}
+    {% include 'cms/partials/breadcrumb.html' %}
+{% endif %}
+<div class="card">
+    {% block table %}
+    {% if table.search_fields %}
+        {% include 'cms/partials/search_fields.html' %}
+    {% endif %}
+    <div class="row row-cards">
+        {% if table.filter_fields %}
+            {% include 'cms/partials/table_with_filter.html' %}
+        {% else %}
+            {% include 'cms/partials/table.html' %}
+        {% endif %}
+    </div>
+    {% endblock table %}
+    {% block pagination %}
+    {% if table.page and table.paginator.num_pages > 1 %}
+    <div class="card-footer d-flex align-items-center">
+        <div class="d-none d-md-block">
+            <p class="m-0 text-muted">
+                Page <span>{{ table.page.number }}</span> of <span>{{ table.paginator.num_pages }}</span>.
+            </p>
+        </div>
+        <ul class="pagination m-0 ml-md-auto">
+            {% if table.page.has_previous %}
+            {% block pagination.previous %}
+            <li class="page-item">
+                <a class="page-link" href="{% querystring table.prefixed_page_field=table.page.previous_page_number %}"
+                    tabindex="-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                        <polyline points="15 6 9 12 15 18"></polyline>
+                    </svg>
+                    {% trans 'previous' %}
+                </a>
+            </li>
+            {% endblock pagination.previous %}
+            {% endif %}
+            {% if table.page.has_previous or table.page.has_next %}
+            {% block pagination.range %}
+            {% for p in table.page|table_page_range:table.paginator %}
+            <li class="page-item{% if table.page.number == p %} active{% endif %}">
+                <a class="page-link" {% if p != '...' %}href="{% querystring table.prefixed_page_field=p %}"
+                    {% endif %}>
+                    {{ p }}
+                </a>
+            </li>
+            {% endfor %}
+            {% endblock pagination.range %}
+            {% endif %}
+            {% if table.page.has_next %}
+            {% block pagination.next %}
+            <li class="page-item">
+                <a class="page-link" href="{% querystring table.prefixed_page_field=table.page.next_page_number %}">
+                    {% trans 'next' %} <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z"></path>
+                        <polyline points="9 6 15 12 9 18"></polyline>
+                    </svg>
+                </a>
+            </li>
+            {% endblock pagination.next %}
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endblock pagination %}
+</div>
+{% endblock table-wrapper %}
